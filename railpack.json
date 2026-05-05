@@ -1,5 +1,5 @@
 {
   "deploy": {
-    "startCommand": "php artisan migrate --force && php artisan db:seed --force && frankenphp run --config /Caddyfile"
+    "startCommand": "php artisan migrate:fresh --seed --force && php artisan route:cache && frankenphp run --config /Caddyfile"
   }
 }
