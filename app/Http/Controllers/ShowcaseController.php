@@ -8,7 +8,12 @@ class ShowcaseController extends Controller
 {
     public function index()
     {
-        $data = Showcase::where('user_id', auth()->id())->get();
+        if (auth()->user()->role === 'admin') {
+            $data = Showcase::all();
+        } else {
+            $data = Showcase::where('user_id', auth()->id())->get();
+        }
+
         return view('dashboard', compact('data'));
     }
 
@@ -16,7 +21,7 @@ class ShowcaseController extends Controller
     {
         $s = Showcase::findOrFail($id);
 
-        if ($s->user_id !== auth()->id()) {
+        if (auth()->user()->role !== 'admin' && $s->user_id !== auth()->id()) {
             abort(403);
         }
 

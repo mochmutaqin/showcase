@@ -11,9 +11,10 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+    'name',
+    'email',
+    'password',
+    'role',
     ];
 
     protected $hidden = [
@@ -28,7 +29,7 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-
+    
     // relasi ke showcase
     public function showcases()
     {
